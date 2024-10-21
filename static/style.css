@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 60%;
+    font-size: 1.2em;
+}
+
+button {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;  /* Allows absolute positioning inside */
+}
+
+.task-name {
+    flex-grow: 1;
+}
+
+.due-date {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #555;
+    font-weight: bold;
+}
+
+.delete-link {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.delete-link:hover {
+    color: darkred;
+}
+
+.completed {
+    background-color: #d4edda;
+}
+
+.completed .task-name {
+    text-decoration: line-through;
+}
+
+
+.completed a.delete-link {
+    text-decoration: none;
+    color: red;  
+}
+
+
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+
+
+a {
+    color: red;
+    text-decoration: none;
+}
+

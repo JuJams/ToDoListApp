@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="task" placeholder="Enter task">
+        <input type = "date" name = "due_date" placeholder = "Due date">
+        <button type="submit">Add Task</button>
+    </form>
+    
+    <!-- Motivational Message -->
+    {% if message %}
+        <p style = "color: green; font-weight: bold;"> {{message}}</p>
+    {% endif %}
+
+    <ul>
+        {% for task in tasks %}
+        <li class="task-item {% if task[3] == 1 %}completed{% endif %}">
+            <input type="checkbox" onclick="toggleComplete({{ task[0] }})" {% if task[3] == 1 %}checked{% endif %}>
+            <span class="task-name">{{ task[1] }}</span>
+            {% if task[2] %}
+                <span class="due-date"><strong>{{ task[2] }}</strong></span>
+            {% endif %}
+            <a href="/delete/{{ task[0] }}" class="delete-link">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+
+    <script>
+    function toggleComplete(task_id) {
+        fetch(`/toggle/${task_id}`, { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                const checkbox = document.querySelector(`input[onclick="toggleComplete(${task_id})"]`);
+                const taskItem = checkbox.closest('li');
+                taskItem.classList.toggle('completed');
+            }
+        });
+    }
+    </script>
+
+
+
+</body>
+</html>
+
