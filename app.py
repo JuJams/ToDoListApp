@@ -1,3 +1,6 @@
+# Sanjana Chowdary
+# To Do List App
+
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
 import sqlite3
@@ -29,9 +32,6 @@ motivational_messages = [
     "Let's make it happen! 🚀"
 ]
 
-
-
-# Database initialization
 def init_db():
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
@@ -55,42 +55,35 @@ def convert_dates():
     for task in tasks:
         task_id = task[0]
         old_date = task[1]
-
-        # Skip tasks that already have dates in the correct format
         try:
             datetime.datetime.strptime(old_date, "%Y-%m-%d")
             continue
         except ValueError:
             pass
-
-        # Convert from 'Month Day, Year' to 'YYYY-MM-DD'
+            
         try:
             old_date_obj = datetime.datetime.strptime(old_date, "%B %d, %Y")
             new_date = old_date_obj.strftime('%Y-%m-%d')
 
-            # Update the task with the new date format
             cursor.execute("UPDATE tasks SET due_date = ? WHERE id = ?", (new_date, task_id))
         except:
-            # Handle any potential errors for tasks with no due date or invalid format
             pass
 
     conn.commit()
     conn.close()
     
-    
-# Home page: Display all tasks
+
 @app.route('/')
 def index():
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
-    # Ensure you're retrieving the 'completed' field along with the task name and due date
     cursor.execute("SELECT id, task, due_date, completed FROM tasks ORDER BY CASE WHEN due_date IS NULL THEN 1 ELSE 0 END, due_date DESC")
     tasks = cursor.fetchall()
     conn.close()
     return render_template('index.html', tasks=tasks)
 
 
-# Add new task
+
 @app.route('/add', methods=['POST'])
 def add_task():
     task = request.form.get('task')
@@ -102,9 +95,7 @@ def add_task():
         cursor = conn.cursor()
 
         if due_date:
-            # Convert the due_date string to a datetime object
             due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
-            # Format it in the desired format: "Month Day, Year"
             due_date_formatted = due_date_obj.strftime("%B %d, %Y")
             print("Formatted Due Date:", due_date_formatted)  # Debugging print statement
         else:
@@ -114,7 +105,6 @@ def add_task():
         conn.commit()
         conn.close()
 
-    # Fetch the updated task list to display it on the page
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tasks ORDER BY CASE WHEN due_date IS NULL THEN 1 ELSE 0 END, date(due_date) DESC")
@@ -130,23 +120,17 @@ def toggle_task(task_id):
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
 
-    # Fetch the current completed status
     cursor.execute("SELECT completed FROM tasks WHERE id = ?", (task_id,))
     current_status = cursor.fetchone()[0]
 
-    # Toggle the completed status
     new_status = 0 if current_status == 1 else 1
 
-    # Update the task's completed status in the database
     cursor.execute("UPDATE tasks SET completed = ? WHERE id = ?", (new_status, task_id))
     conn.commit()
     conn.close()
 
-    return '', 204  # Return 'No Content' response
+    return '', 204
 
-
-
-# Delete task
 @app.route('/delete/<int:task_id>')
 def delete_task(task_id):
     conn = sqlite3.connect('tasks.db')
