@@ -97,7 +97,7 @@ def add_task():
         if due_date:
             due_date_obj = datetime.strptime(due_date, "%Y-%m-%d")
             due_date_formatted = due_date_obj.strftime("%B %d, %Y")
-            print("Formatted Due Date:", due_date_formatted)  # Debugging print statement
+            print("Formatted Due Date:", due_date_formatted)
         else:
             due_date_formatted = None
         
