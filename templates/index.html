@@ -5,50 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css"href="static/fonts/fonts.css"/>
+    <script src="task-split.js"></script>
 </head>
 <body>
-    <h1>To-Do List</h1>
-    <form action="/add" method="POST">
-        <input type="text" name="task" placeholder="Enter task">
-        <input type = "date" name = "due_date" placeholder = "Due date">
-        <button type="submit">Add Task</button>
-    </form>
     
-    <!-- Motivational Message -->
-    {% if message %}
-        <p style = "color: green; font-weight: bold;"> {{message}}</p>
-    {% endif %}
+    <div class="container">
+        <h1>To-Do List</h1>
 
-    <ul>
-        {% for task in tasks %}
-        <li class="task-item {% if task[3] == 1 %}completed{% endif %}">
-            <input type="checkbox" onclick="toggleComplete({{ task[0] }})" {% if task[3] == 1 %}checked{% endif %}>
-            <span class="task-name">{{ task[1] }}</span>
-            {% if task[2] %}
-                <span class="due-date"><strong>{{ task[2] }}</strong></span>
-            {% endif %}
-            <a href="/delete/{{ task[0] }}" class="delete-link">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
+        <!-- Add Task Form -->
+        <form action="/add" method="POST">
+            <div class="input-group">
+                <input type="text" name="task" placeholder="Enter task" required>
+                <input type="date" name="due_date" placeholder="Due date">
+                <button type="submit">Add Task</button>
+            </div>
+        </form>
+        
+        <!-- Motivational Message -->
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
 
+        <!-- Task List -->
+        <ul>
+            {% for task in tasks %}
+            <li class="task-item {% if task[3] == 1 %}completed{% endif %}">
+                <input type="checkbox" onclick="toggleComplete({{ task[0] }})" {% if task[3] == 1 %}checked{% endif %}>
+                <span class="task-name">{{ task[1] }}</span>
+                {% if task[2] %}
+                    <span class="due-date"><strong>{{ task[2] }}</strong></span>
+                {% endif %}
+                <a href="/delete/{{ task[0] }}" class="delete-link">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
 
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <label>Completion: <span id="completion-percentage">{{ completion_percentage }}%</span></label>
+            <progress id="progress-bar" value="{{ completion_percentage }}" max="100"></progress>
+        </div>
+    </div>
+
+    <!-- Bento Boxes Section -->
+    <div class="bento-boxes">
+        <!-- Weekly Progress Bento Box -->
+        <div class="bento-box">
+            <h2>Week's Progress</h2>
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="progress-text">70% completed</div>
+        </div>
+
+        <!-- Friends Progress Bento Box (Mockup) -->
+        <div class="bento-box">
+            <div class="friends-progress-container">
+                <h2>Groups' Progress</h2>
+                <div class="friend-progress">
+                    <div class="friend-info">
+                        <span class="friend-name">HCI Final project</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 60%"></div>
+                        </div>
+                        <span class="progress-text">60% Complete</span>
+                    </div>
+                    <div class="friend-info">
+                        <span class="friend-name">Roomates group</span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                        <span class="progress-text">85% Complete</span>
+                    </div>
+                    <!-- Add more friends as needed -->
+                </div>
+            </div>
+            
+            <!-- Button to Check Groups -->
+            <div class="check-groups-container">
+                <a href= "/8000"><button class="check-groups-btn">Check Your Groups</button></a>
+            </div>
+            
+        </div>
+
+                <!-- New Bento Box for Task Split Generator -->
+            <div class="bento-box-task-split">
+                    <h2>Task Split Generator</h2>
+                    <form id="task-split-form">
+                        <input type="text" id="task-name" placeholder="Enter task name" required>
+                        <button type="submit">Generate Task Split</button>
+                    </form>
+                    <ul id="task-split-list">
+                        <!-- Generated subtasks will appear here -->
+                       
+                    </ul>
+                </div>
+                
+
+    </div>
+</div>
 
     <script>
     function toggleComplete(task_id) {
+        // Toggle completion status on the server
         fetch(`/toggle/${task_id}`, { method: 'POST' })
         .then(response => {
             if (response.ok) {
                 const checkbox = document.querySelector(`input[onclick="toggleComplete(${task_id})"]`);
                 const taskItem = checkbox.closest('li');
                 taskItem.classList.toggle('completed');
+
+                // Update the progress bar dynamically
+                updateProgressBar();
             }
         });
     }
+
+    function updateProgressBar() {
+        // Get the total number of tasks and the completed tasks
+        const totalTasks = document.querySelectorAll('li').length;
+        const completedTasks = document.querySelectorAll('.completed').length;
+
+        // Calculate the completion percentage
+        const percentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+        // Update the progress bar and percentage text
+        document.getElementById('progress-bar').value = percentage;
+        document.getElementById('completion-percentage').textContent = Math.round(percentage) + '%';
+    }
+
+    // Initial call to update the progress bar when the page loads
+    updateProgressBar();
     </script>
-
-
-
 </body>
 </html>
-
