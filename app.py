@@ -49,7 +49,7 @@ def index():
     #chatbot tings
     prompt = request.form.get("prompt")
     if not prompt:
-        prompt = "What tasks do I have to complete today?"
+        prompt = "Hi how are you today? What questions can i ask you to start off our conversation?"
     print(tasks)
     print(prompt)
     output = chatbot(prompt,tasks)
