@@ -41,7 +41,7 @@ body {
     background-color: #333;
     background-size: cover;
     background-position: center;
-    overflow-y: hidden;
+    margin: 20px;
 }
 
 h1 {
@@ -62,6 +62,7 @@ p, span, label, li, ul, a {
     max-width: 1200px;
     width: 100%;
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 .container {
@@ -93,7 +94,6 @@ p, span, label, li, ul, a {
 }
 
 .bento-box {
-
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.9px);
@@ -266,15 +266,6 @@ label{
     color: white;
 }
 
-.friends-progress-container {
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3.9px);
-    -webkit-backdrop-filter: blur(3.9px);
-    margin-bottom: 20px;
-}
-
 .friend-progress {
     display: flex;
     flex-direction: column;
@@ -380,4 +371,12 @@ label{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     font-weight: normal;
     color: #333;
+}
+/* 
+chatbot styles
+*/
+.bento-box#chatbot {
+    height: 730px;
+    padding: 30px;
+    justify-content: start;
 }
