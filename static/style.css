@@ -1,47 +1,81 @@
-/* General Styles */
-body {
-    font-family:'SF UI Display Bold';
-    padding: 0;
+.main-container {
+    width: 90%;
+    max-width: 1400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); 
     display: flex;
-    justify-content: center;  /* Center horizontally */
-    align-items: center;      /* Center vertically */
+    flex-direction: row;
+    padding: 30px;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; 
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    height: 100vh; 
+    padding: 20px; 
     background-color: #333;
-    background-image: url('https://images.unsplash.com/photo-1505415879449-f158638f1af7?q=80&w=3027&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-position: center;
+    overflow-y: hidden;
 }
 
-h1, h2, p, span, li, .task-name, .due-date, .delete-link, .message, .progress-text {
-    font-family: "SF UI Display Bold", "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+h1 {
+    font-family: 'SF UI Display Bold';
+}
+h2 {
+    font-family: 'SF UI Display Medium';
+}
+p, span, label, li, ul, a {
+    font-family: 'SF UI Display Light';
 }
 
-/* Container wrapper and layout */
 .container-wrapper {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    gap: 20px;               /* Space between To-Do List and Bento Boxes */
+    justify-content: center;
+    align-items: center;     
+    gap: 20px;              
     max-width: 1200px;
     width: 100%;
     padding: 20px;
 }
 
 .container {
-    top: 40px;
-    width: 65%;  /* Adjust width for the To-Do list */
+    width: 65%;  
     max-width: 400px;
-    height: 730px;  /* Set a fixed height for the To-Do List */
+    height: 730px;  
     padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    overflow-y: auto;  /* Allow scrolling if content exceeds height */
+    align-items: start;
+    overflow-y: auto;  
     color: #333;
-    background: rgba(62, 40, 40, 0.25);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.9px);
     -webkit-backdrop-filter: blur(3.9px);
     border: 1px solid rgba(62, 40, 40, 0.13);
@@ -52,17 +86,14 @@ h1, h2, p, span, li, .task-name, .due-date, .delete-link, .message, .progress-te
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width:30%;  /* Adjust width of Bento Box section */
-    overflow-y: auto; /* Allow scrolling if content exceeds height */
-    padding-top: 100px;
+    width:30%; 
+    overflow-y: auto; 
     padding-bottom: 20px;
     
 }
 
 .bento-box {
 
-
-    background: rgba(62, 40, 40, 0.35);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.9px);
@@ -93,7 +124,7 @@ h1, h2, p, span, li, .task-name, .due-date, .delete-link, .message, .progress-te
 .bento-box .progress-bar {
     height: 100%;
     background-color: #8C7503;
-    width: 70%; /* Example progress */
+    width: 70%; 
     border-radius: 10px;
     transition: width 0.5s ease;
 }
@@ -114,7 +145,7 @@ button {
     font-size: 1em;
     border-radius: 5px;
     background: #40281F; /* Transparent button */
-    font-family:'SF UI Display Thin';
+    
     font-weight:normal;
     
 }
@@ -139,7 +170,6 @@ h1 {
 input[type="text"], input[type="date"] {
     padding: 10px;
     font-size: 1em;
-    font-family:'SF UI Display Thin';
     font-weight:normal;
     border-radius: 5px;
     border : none;
@@ -153,7 +183,6 @@ ul {
     padding: 0;
     margin: 0;
     width: 100%; /* Ensure the list spans the container width */
-    font-family:'SF UI Display Thin';
     font-weight:normal;
 }
 
@@ -168,7 +197,6 @@ li {
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
-    font-family:'SF UI Display Thin';
     font-weight:normal;
 }
 
@@ -180,7 +208,6 @@ li:hover {
     font-size: 1.1em;
     color: #333;
     flex-grow: 1;
-    font-family:'SF UI Display Thin';
     font-weight:normal;
 }
 
@@ -193,7 +220,6 @@ li:hover {
     color: #e74c3c;
     text-decoration: none;
     font-weight: bold;
-    font-family:'SF UI Display Thin';
     font-weight:normal;
 }
 
@@ -203,7 +229,7 @@ li:hover {
 }
 
 .completed {
-    background-color: rgba(211, 237, 218, 0.7); /* Light green for completed tasks */
+    background-color: rgba(211, 237, 218, 0.7); 
 }
 
 .completed .task-name {
@@ -215,14 +241,14 @@ input[type="checkbox"] {
 }
 
 progress {
-    width: 100%; /* Progress bar spans the container */
+    width: 100%;
     height: 20px;
     margin-top: 10px;
 }
 
 .progress-container {
     margin-top: 30px;
-    width: 100%; /* Ensure progress bar aligns with other content */
+    width: 100%;
 }
 
 .message {
@@ -230,7 +256,6 @@ progress {
     font-weight: bold;
     margin-top: 15px;
     font-size: 1.1em;
-    font-family:'SF UI Display Thin';
     font-weight:normal;
 }
 
@@ -242,7 +267,6 @@ label{
 }
 
 .friends-progress-container {
-    background: rgba(62, 40, 40, 0.25);
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -258,14 +282,13 @@ label{
 }
 
 .friend-info {
-    background-color: rgba(255, 255, 255, 0.6); /* Slight transparency */
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'SF UI Display Thin';
 }
 
 .friend-name {
@@ -296,7 +319,7 @@ label{
     font-size: 0.6em;
 }
 
-/* Check Groups Button */
+
 .check-groups-container {
     display: flex;
     justify-content: center;
@@ -312,17 +335,16 @@ label{
     cursor: pointer;
     font-size: 1em;
     border-radius: 5px;
-    background: #40281F; /* Transparent button */
-    font-family: 'SF UI Display Thin';
+    background: #40281F;
 }
 
 .check-groups-btn:hover {
     background-color: #D9B89C;
 }
 
-/* Task Split Bento Box */
+
 .bento-box-task-split {
-    background: rgba(62, 40, 40, 0.35);
+
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.9px);
@@ -347,7 +369,6 @@ label{
     list-style-type: none;
     padding: 0;
     margin: 0;
-    font-family: 'SF UI Display Thin';
     font-weight: normal;
 }
 
@@ -357,7 +378,6 @@ label{
     margin: 5px 0;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    font-family: 'SF UI Display Thin';
     font-weight: normal;
     color: #333;
 }
