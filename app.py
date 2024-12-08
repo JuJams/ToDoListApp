@@ -50,18 +50,23 @@ def index():
     prompt = request.form.get("prompt")
     if not prompt:
         prompt = "What tasks do I have to complete today?"
-    
+    print(tasks)
     print(prompt)
-    output = chatbot(prompt)
+    output = chatbot(prompt,tasks)
     print(output)
     conn.close()
-    return render_template('index.html', tasks=tasks, completion_percentage=int(completion_percentage))
-def chatbot(prompt):
+    return render_template('index.html', tasks=tasks, completion_percentage=int(completion_percentage), output=output)
+def chatbot(prompt,tasks):
+    tasks_string = "\n".join([f"ID: {task[0]}, Task: {task[1]}, Due Date: {task[2]}, Completed: {bool(task[3])}" for task in tasks])
     completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful ToDo list assistant."},
-            {"role": "user", "content": prompt}
+            {"role": "system", "content": "You are a helpful ToDo list assistant. You are helping the user manage their tasks. The following are the tasks the user has and their due dates with what questions they have asked you. Respond to their questions with helpful answers."},
+            {"role": "user", "content": prompt},
+            {"role": "assistant", "content": "These are my tasks"},
+            {"role": "assistant", "content": tasks_string}
+
+
         ]
     )
     response = completion.choices[0].message.content

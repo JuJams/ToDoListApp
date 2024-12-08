@@ -388,7 +388,10 @@ chatbot styles
     border-radius: 10px;
     font-size: 0.9em;
 }
-
-.chatbot-message p {
+.chatbot-message p{
     margin: 0;
+}
+.chatbot-response{
+    max-width: 300px;
+    text-align: center;
 }
