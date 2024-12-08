@@ -1,14 +1,17 @@
-# Sanjana Chowdary
-# To Do List App
-
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
 import sqlite3
 import random
+import os
+import openai
+from dotenv import load_dotenv, dotenv_values
 
 app = Flask(__name__)
 
+load_dotenv()
 
+openai.api_key = os.getenv("OPENAI_API_KEY")
+# app.config["TEMPLATES_AUTO_RELOAD"] = True
 motivational_messages = [
     "You got this! 💪", "Keep going! 🚀", "Great job! 🎉", "Stay focused! 💡",
     "You're unstoppable! 🌟", "Believe in yourself! 🌈", "One step at a time! 🏃‍♂️",
@@ -31,21 +34,38 @@ def init_db():
     conn.commit()
     conn.close()
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
 def index():
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
     cursor.execute("SELECT id, task, due_date, completed FROM tasks ORDER BY CASE WHEN due_date IS NULL THEN 1 ELSE 0 END, due_date DESC")
     tasks = cursor.fetchall()
     
-    # Calculate completion percentage
+    # calculate completion percentage
     total_tasks = len(tasks)
     completed_tasks = sum(1 for task in tasks if task[3] == 1)
     completion_percentage = (completed_tasks / total_tasks) * 100 if total_tasks > 0 else 0
     
-    conn.close()
+    #chatbot tings
+    prompt = request.form.get("prompt")
+    if not prompt:
+        prompt = "What tasks do I have to complete today?"
     
+    print(prompt)
+    output = chatbot(prompt)
+    print(output)
+    conn.close()
     return render_template('index.html', tasks=tasks, completion_percentage=int(completion_percentage))
+def chatbot(prompt):
+    completion = openai.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful ToDo list assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    response = completion.choices[0].message.content
+    return response
 
 @app.route('/add', methods=['POST'])
 def add_task():

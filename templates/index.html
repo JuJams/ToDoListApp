@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" type="text/css"href="static/fonts/fonts.css"/>
     <script src="task-split.js"></script>
+    <script src="chatbot.js"></script>
+    
 </head>
 <body>
     <div class="video-background">
@@ -113,25 +115,22 @@
                 
 
     </div>
-    <div class="bento-boxes">
-        <div class="bento-box" id="chatbot">
-            <h2>Chatbot</h2>
-            <div class="chatbot">
-                <div class="chatbot-container">
-                    <div class="chatbot-messages" id="chatbot-messages">
-                        <div class="chatbot-message">
-                            <p>This chatbot answers questions with the context of your tasks!</p>
-                        </div>
+    <div class="bento-box" id="chatbot">
+        <h2>Chatbot</h2>
+        <div class="chatbot">
+            <div class="chatbot-container">
+                <div class="chatbot-messages" id="chatbot-messages">
+                    <div class="chatbot-message">
+                        <p>This chatbot answers questions with the context of your tasks!</p>
                     </div>
-                    <form id="chatbot-form">
-                        <input type="text" id="chatbot-input" placeholder="Ask me anything" required>
-                        <button type="submit">Send</button>
-                    </form>
                 </div>
-
+                <form action="/" method="POST">
+                    <input type="text" name="prompt" placeholder="Enter your prompt" />
+                    <button type="submit">Ask</button>
+                </form>
+            </div>
         </div>
-    </div>
-</div>
+    </div>    
 </div>
 
     <script>
