@@ -63,7 +63,6 @@
     cursor: pointer;
 }
 
-/* Button styling */
 .settings-section button {
     padding: 10px 20px;
     background-color: #8C7503;
@@ -99,4 +98,9 @@
         font-size: 0.9em;
         padding: 8px 15px;
     }
+}
+
+.settings-container{
+    display: flex;
+    gap: 100px;
 }
