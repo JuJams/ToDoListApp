@@ -4,6 +4,7 @@ import sqlite3
 import random
 import os
 import openai
+import csv
 from dotenv import load_dotenv, dotenv_values
 
 app = Flask(__name__)
@@ -193,31 +194,66 @@ def update_peer_finding():
     user['find_peers'] = 'find_peers' in request.form 
     
     return redirect(url_for('settings'))
+
+
+
+def read_users():
+    users = []
+    with open('users.csv', mode='r') as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            users.append(row)
+    return users
+
+@app.route('/find_peer')
+def find_peer():
+    return render_template('find_peer.html')
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    q1 = request.form['q1']
+    q2 = request.form['q2']
+    q3 = request.form['q3']
+    q4 = request.form['q4']
+    q5 = request.form['q5']
+    q6 = request.form['q6']
+    q7 = request.form['q7']
+
+    users = read_users()
+    matched_user = None
+    for user in users:
+        name, email, answers = user[0], user[1], user[2:]
+        matches = sum([1 for i in range(5) if answers[i] == [q3, q4, q5, q6, q7][i]])
+
+        if matches >= 2:
+            matched_user = user
+            break
+
+    if not matched_user:
+        warning_message = "No matches found with 1 or more answers."
+        return render_template('find_peer.html', warning_message=warning_message)
+
+    return render_template('find_peer.html', user=matched_user)
+
+@app.route('/reject/<user_id>', methods=['GET'])
+def reject(user_id):
+    print(f"User with ID {user_id} was rejected.")
+    return redirect(url_for('find_peer'))
+
+@app.route('/accept/<user_id>', methods=['GET'])
+def accept(user_id):
+    print(f"User with ID {user_id} was accepted.")
+    return redirect(url_for('find_peer'))
+
+def get_users():
+    conn = sqlite3.connect('peer_matching.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM users')
+    users = c.fetchall()
+    conn.close()
+    return users
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
-
-@app.route('/toggle/<int:task_id>', methods=['POST'])
-def toggle_task(task_id):
-    conn = sqlite3.connect('tasks.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT completed FROM tasks WHERE id = ?", (task_id,))
-    current_status = cursor.fetchone()[0]
-    new_status = 0 if current_status == 1 else 1
-    cursor.execute("UPDATE tasks SET completed = ? WHERE id = ?", (new_status, task_id))
-    conn.commit()
-    conn.close()
-
-    return '', 204  
-
-@app.route('/groups')
-def groups():
-
-    user_classes = ["Class 1", "Class 2", "Class 3", "Class 4"]
-    
-    class_peers = {class_name: [] for class_name in user_classes}
-    for user in users:
-        if user["class"] in user_classes:
-            class_peers[user["class"]].append(user)
-    
-    return render_template("groups.html", class_peers=class_peers)

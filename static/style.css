@@ -168,6 +168,7 @@ h1 {
 }
 
 input[type="text"], input[type="date"] {
+    margin: 5px;
     padding: 10px;
     font-size: 1em;
     font-weight:normal;
