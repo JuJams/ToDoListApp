@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" type="text/css"href="static/fonts/fonts.css"/>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="static/fonts/fonts.css"/>
     <script src="task-split.js"></script>
     <script src="chatbot.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/groups.css">
 </head>
 <body>
     <div class="video-background">
         <video autoplay loop muted>
-            <source src="static\assets\stars.mp4" type="video/mp4">
-           
+            <source src="static/assets/stars.mp4" type="video/mp4">
         </video>
     </div>
     <div class="sidebar">
@@ -26,45 +26,70 @@
     </div>
 
     <div class="main-container">
-    
-    
-                
+        <div class="class-section">
+            <h1>Your Classes</h1>
+            <p>Find peers from the classes you are in!</p>
 
+            <!-- Class Box 1 -->
+            <div class="class-box">
+                <h3>Math 101</h3>
+                <div class="peer-list">
+                    <!-- Dynamic Peer Circles (Each with a profile picture) -->
+                    <div class="peer-circle" data-peer-id="1" onclick="sendFriendRequest('Alex Huang')">
+                        <img src="static/assets/path_to_peer_image_1.jpg" alt="Peer 1">
+                    </div>
+                    <div class="peer-circle" data-peer-id="2" onclick="sendFriendRequest('Alice ren')">
+                        <img src="static/assets/path_to_peer_image_2.jpg" alt="Peer 2">
+                    </div>
+                    <div class="peer-circle" data-peer-id="2" onclick="sendFriendRequest('Daniel dean')">
+                        <img src="static/assets/path_to_peer_image_7.jpg" alt="Peer 7">
+                    </div>
+                    <div class="peer-circle" data-peer-id="2" onclick="sendFriendRequest('David Ortiz')">
+                        <img src="static/assets/path_to_peer_image_8.jpg" alt="Peer 8">
+                    </div>
+                    <div class="peer-circle" data-peer-id="2" onclick="sendFriendRequest('Anu raghav')">
+                        <img src="static/assets/path_to_peer_image_9.jpg" alt="Peer 9">
+                    </div>
+                    <!-- More peers can go here -->
+                </div>
+            </div>
+
+            <!-- Class Box 2 -->
+            <div class="class-box">
+                <h3>Physics 102</h3>
+                <div class="peer-list">
+                    <div class="peer-circle" data-peer-id="3" onclick="sendFriendRequest('San Pears')">
+                        <img src="static/assets/path_to_peer_image_3.jpg" alt="Peer 3">
+                    </div>
+                    <div class="peer-circle" data-peer-id="4" onclick="sendFriendRequest('Pearl Pelice')">
+                        <img src="static/assets/path_to_peer_image_4.jpg" alt="Peer 4">
+                    </div>
+                    <div class="peer-circle" data-peer-id="6" onclick="sendFriendRequest('Mane menace')">
+                        <img src="static/assets/path_to_peer_image_6.jpg" alt="Peer 6">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Class Box 3 -->
+            <div class="class-box">
+                <h3>Computer Science 103</h3>
+                <div class="peer-list">
+                    <div class="peer-circle" data-peer-id="5" onclick="sendFriendRequest('Anuv Mehta')">
+                        <img src="static/assets/path_to_peer_image_5.jpg" alt="Peer 5">
+       
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-   
-</div>
 
     <script>
-    function toggleComplete(task_id) {
-        // Toggle completion status on the server
-        fetch(`/toggle/${task_id}`, { method: 'POST' })
-        .then(response => {
-            if (response.ok) {
-                const checkbox = document.querySelector(`input[onclick="toggleComplete(${task_id})"]`);
-                const taskItem = checkbox.closest('li');
-                taskItem.classList.toggle('completed');
-
-                // Update the progress bar dynamically
-                updateProgressBar();
-            }
-        });
+    // Function to send a friend request (can trigger a notification)
+    function sendFriendRequest(peerName) {
+        // Simulating the sending of a friend request
+        alert(`${peerName} has received your friend request!`);
     }
-
-    function updateProgressBar() {
-        // Get the total number of tasks and the completed tasks
-        const totalTasks = document.querySelectorAll('li').length;
-        const completedTasks = document.querySelectorAll('.completed').length;
-
-        // Calculate the completion percentage
-        const percentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
-
-        // Update the progress bar and percentage text
-        document.getElementById('progress-bar').value = percentage;
-        document.getElementById('completion-percentage').textContent = Math.round(percentage) + '%';
-    }
-
-    // Initial call to update the progress bar when the page loads
-    updateProgressBar();
     </script>
 </body>
 </html>

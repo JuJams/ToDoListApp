@@ -21,6 +21,14 @@ motivational_messages = [
     "Your hard work will pay off! 💰", "Don't stop now! 🎯", "You're almost there! ⏳", 
     "Let's make it happen! 🚀"
 ]
+users = [
+    {"id": 1, "name": "Peer 1", "image_url": "path_to_peer_image_1.jpg", "class": "Class 1"},
+    {"id": 2, "name": "Peer 2", "image_url": "path_to_peer_image_2.jpg", "class": "Class 1"},
+    {"id": 3, "name": "Peer 3", "image_url": "path_to_peer_image_3.jpg", "class": "Class 2"},
+    {"id": 4, "name": "Peer 4", "image_url": "path_to_peer_image_4.jpg", "class": "Class 2"},
+    {"id": 5, "name": "Peer 5", "image_url": "path_to_peer_image_5.jpg", "class": "Class 3"},
+    {"id": 6, "name": "Peer 6", "image_url": "path_to_peer_image_6.jpg", "class": "Class 4"}
+]
 
 def init_db():
     conn = sqlite3.connect('tasks.db')
@@ -201,3 +209,15 @@ def toggle_task(task_id):
     conn.close()
 
     return '', 204  
+
+@app.route('/groups')
+def groups():
+
+    user_classes = ["Class 1", "Class 2", "Class 3", "Class 4"]
+    
+    class_peers = {class_name: [] for class_name in user_classes}
+    for user in users:
+        if user["class"] in user_classes:
+            class_peers[user["class"]].append(user)
+    
+    return render_template("groups.html", class_peers=class_peers)
