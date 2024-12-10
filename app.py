@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import sqlite3
 import random
@@ -133,6 +133,45 @@ def delete_task(task_id):
     conn.close()
     return redirect('/')
 
+@app.route('/groups')
+def groups():
+    return render_template('groups.html') 
+
+
+user = {
+    'name': 'John Doe',
+    'email': 'john@example.com',
+    'classes': 'Math 101, Physics 102, Computer Science 103',
+    'peer_preferences': 'Available for group work in the evenings',
+    'find_peers': True
+}
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html', user=user)
+
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    # Get form data
+    user['name'] = request.form['name']
+    user['email'] = request.form['email']
+    user['classes'] = request.form['classes']
+    
+    # You can save the updated data to a database here
+    # Redirect back to the settings page with the updated information
+    return redirect(url_for('settings'))
+
+# Route to update the peer finding settings
+@app.route('/update_peer_finding', methods=['POST'])
+def update_peer_finding():
+    # Get form data
+    user['peer_preferences'] = request.form['peer_preferences']
+    user['find_peers'] = 'find_peers' in request.form  # Check if the checkbox was ticked
+    
+    # You can save the updated data to a database here
+    # Redirect back to the settings page with the updated settings
+    return redirect(url_for('settings'))
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)

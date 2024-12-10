@@ -1,0 +1,102 @@
+
+.main-container {
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin: 20px auto;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+.settings-section {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.settings-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: white;
+    font-family: 'SF UI Display Medium';
+}
+
+
+.settings-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.settings-section label {
+    font-size: 1em;
+    color: white;
+    font-family: 'SF UI Display Light';
+}
+
+.settings-section input[type="text"],
+.settings-section input[type="email"],
+.settings-section textarea {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.6);
+    color: #333;
+    font-family: 'SF UI Display Light';
+}
+
+.settings-section textarea {
+    resize: none;
+}
+
+.settings-section input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Button styling */
+.settings-section button {
+    padding: 10px 20px;
+    background-color: #8C7503;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'SF UI Display Medium';
+    transition: background-color 0.3s ease;
+}
+
+.settings-section button:hover {
+    background-color: #D9B89C;
+}
+
+
+@media screen and (max-width: 768px) {
+    .main-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .settings-section {
+        padding: 15px;
+    }
+
+    .settings-section h2 {
+        font-size: 1.5em;
+    }
+
+    .settings-section button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+}

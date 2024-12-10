@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css"href="static/fonts/fonts.css"/>
+    <script src="task-split.js"></script>
+    <script src="chatbot.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="static\assets\stars.mp4" type="video/mp4">
+           
+        </video>
+    </div>
+    <div class="sidebar">
+        <ul>
+            <li><a href="/"><i class="fas fa-home"></i></a></li>
+            <li><a href="/groups"><i class="fas fa-users"></i></a></li>
+            <li><a href="/settings"><i class="fas fa-cogs"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="main-container">
+    
+    
+                
+
+    </div>
+   
+</div>
+
+    <script>
+    function toggleComplete(task_id) {
+        // Toggle completion status on the server
+        fetch(`/toggle/${task_id}`, { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                const checkbox = document.querySelector(`input[onclick="toggleComplete(${task_id})"]`);
+                const taskItem = checkbox.closest('li');
+                taskItem.classList.toggle('completed');
+
+                // Update the progress bar dynamically
+                updateProgressBar();
+            }
+        });
+    }
+
+    function updateProgressBar() {
+        // Get the total number of tasks and the completed tasks
+        const totalTasks = document.querySelectorAll('li').length;
+        const completedTasks = document.querySelectorAll('.completed').length;
+
+        // Calculate the completion percentage
+        const percentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+        // Update the progress bar and percentage text
+        document.getElementById('progress-bar').value = percentage;
+        document.getElementById('completion-percentage').textContent = Math.round(percentage) + '%';
+    }
+
+    // Initial call to update the progress bar when the page loads
+    updateProgressBar();
+    </script>
+</body>
+</html>
