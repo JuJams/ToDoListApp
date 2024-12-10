@@ -131,7 +131,7 @@
             
             <!-- Button to Check Groups -->
             <div class="check-groups-container">
-                <a href= "/8000"><button class="check-groups-btn">Check Your Groups</button></a>
+                <a href= "/groups"><button class="check-groups-btn">Check Your Groups</button></a>
             </div>
             
         </div>
@@ -139,14 +139,11 @@
                 <!-- New Bento Box for Task Split Generator -->
             <div class="bento-box-task-split">
                     <h2>Task Split Generator</h2>
-                    <form id="task-split-form">
-                        <input type="text" id="task-name" placeholder="Enter task name" required>
-                        <button type="submit">Generate Task Split</button>
+                    <form action="/" method="POST">
+                        <input  type="text" name = "tasksplit" placeholder="Enter task name" required>
+                        <button type="submit">Generate</button>
                     </form>
-                    <ul id="task-split-list">
-                        <!-- Generated subtasks will appear here -->
-                       
-                    </ul>
+                    <p class= "chatbot-response">{{ splits }}</p>
                 </div>
                 
 

@@ -54,8 +54,16 @@ def index():
     print(prompt)
     output = chatbot(prompt,tasks)
     print(output)
+    
+    tasksplitfromhtml = request.form.get("tasksplit")
+    if not tasksplitfromhtml:
+        tasksplitfromhtml = "None"
+        tasksplits = ""
+    else:
+        tasksplits = tasksplit(tasksplitfromhtml)
+    
     conn.close()
-    return render_template('index.html', tasks=tasks, completion_percentage=int(completion_percentage), output=output)
+    return render_template('index.html', tasks=tasks, completion_percentage=int(completion_percentage), output=output, splits = tasksplits)
 def chatbot(prompt,tasks):
     tasks_string = "\n".join([f"ID: {task[0]}, Task: {task[1]}, Due Date: {task[2]}, Completed: {bool(task[3])}" for task in tasks])
     completion = openai.chat.completions.create(
@@ -71,7 +79,16 @@ def chatbot(prompt,tasks):
     )
     response = completion.choices[0].message.content
     return response
-
+def tasksplit(task):
+    completion = openai.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Split the following task into less than 5 subtasks in numbered form,"},
+            {"role": "assistant", "content": task}
+        ]
+    )
+    response = completion.choices[0].message.content
+    return response
 @app.route('/add', methods=['POST'])
 def add_task():
     task = request.form.get('task')
