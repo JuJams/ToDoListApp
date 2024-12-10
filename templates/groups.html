@@ -30,11 +30,11 @@
             <h1>Your Classes</h1>
             <p>Find peers from the classes you are in!</p>
 
-            <!-- Class Box 1 -->
+
             <div class="class-box">
                 <h3>Math 101</h3>
                 <div class="peer-list">
-                    <!-- Dynamic Peer Circles (Each with a profile picture) -->
+
                     <div class="peer-circle" data-peer-id="1" onclick="sendFriendRequest('Alex Huang')">
                         <img src="static/assets/path_to_peer_image_1.jpg" alt="Peer 1">
                     </div>
@@ -50,11 +50,11 @@
                     <div class="peer-circle" data-peer-id="2" onclick="sendFriendRequest('Anu raghav')">
                         <img src="static/assets/path_to_peer_image_9.jpg" alt="Peer 9">
                     </div>
-                    <!-- More peers can go here -->
+
                 </div>
             </div>
 
-            <!-- Class Box 2 -->
+
             <div class="class-box">
                 <h3>Physics 102</h3>
                 <div class="peer-list">
@@ -70,7 +70,7 @@
                 </div>
             </div>
 
-            <!-- Class Box 3 -->
+
             <div class="class-box">
                 <h3>Computer Science 103</h3>
                 <div class="peer-list">
@@ -82,12 +82,44 @@
             </div>
 
         </div>
+        <div class="class-section2">
+            <h1>My Groups</h1>
+            <p>Here are the groups you are part of:</p>
+        
+
+            <div class="group-box">
+                <div class="group-header">
+                    <img src="static/assets/hci-group-icon.png" alt="HCI Group Icon" class="group-icon">
+                    <h3>HCI Group</h3>
+                </div>
+                <div class="group-background">
+                    <div class="progress-container">
+                        <label>Progress: <span id="hci-progress">60%</span></label>
+                        <progress id="hci-progress-bar" value="60" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="group-box">
+                <div class="group-header">
+                    <img src="static/assets/roommates-group-icon.png" alt="Roommates Group Icon" class="group-icon">
+                    <h3>Roommates Group</h3>
+                </div>
+                <div class="group-background">
+                    <div class="progress-container">
+                        <label>Progress: <span id="roommates-progress">85%</span></label>
+                        <progress id="roommates-progress-bar" value="85" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-    // Function to send a friend request (can trigger a notification)
+
     function sendFriendRequest(peerName) {
-        // Simulating the sending of a friend request
+
         alert(`${peerName} has received your friend request!`);
     }
     </script>
