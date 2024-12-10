@@ -153,25 +153,34 @@ def settings():
 
 @app.route('/update_profile', methods=['POST'])
 def update_profile():
-    # Get form data
+
     user['name'] = request.form['name']
     user['email'] = request.form['email']
     user['classes'] = request.form['classes']
     
-    # You can save the updated data to a database here
-    # Redirect back to the settings page with the updated information
+   
     return redirect(url_for('settings'))
 
-# Route to update the peer finding settings
 @app.route('/update_peer_finding', methods=['POST'])
 def update_peer_finding():
-    # Get form data
+
     user['peer_preferences'] = request.form['peer_preferences']
-    user['find_peers'] = 'find_peers' in request.form  # Check if the checkbox was ticked
+    user['find_peers'] = 'find_peers' in request.form 
     
-    # You can save the updated data to a database here
-    # Redirect back to the settings page with the updated settings
     return redirect(url_for('settings'))
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
+
+@app.route('/toggle/<int:task_id>', methods=['POST'])
+def toggle_task(task_id):
+    conn = sqlite3.connect('tasks.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT completed FROM tasks WHERE id = ?", (task_id,))
+    current_status = cursor.fetchone()[0]
+    new_status = 0 if current_status == 1 else 1
+    cursor.execute("UPDATE tasks SET completed = ? WHERE id = ?", (new_status, task_id))
+    conn.commit()
+    conn.close()
+
+    return '', 204  
