@@ -1,0 +1,106 @@
+course_id,course_name
+ANST-UA,Animal Studies
+ANTH-UA,Anthropology
+ARTH-UA,Art History
+BIOL-UA,Biology
+CHEM-UA,Chemistry
+CAMS-UA,Child/Adoles Mental Hlth Stds
+CLASS-UA,Classics
+CORE-UA,College Core Curriculum
+COLU-UA,Columbia Language Exchange
+COLIT-UA,Comparative Literature
+CSCI-UA,Computer Science
+CRWRI-UA,Creative Writing
+CFI-UA,Cultural Foundations I
+DS-UA,Data Science
+DRLIT-UA,Dramatic Literature
+EAST-UA,East Asian Studies
+ECON-UA,Economics
+ENGL-UA,English
+ENVST-UA,Environmental Studies
+EURO-UA,European and Mediterranean Studies
+EXPOS-UA,Expository Writing
+FYSEM-UA,First-Year Seminars
+FREN-UA,French
+GERM-UA,German
+GLBL-UA,Global Programs
+HBRJD-UA,Hebrew & Judaic Studies
+HEL-UA,Hellenic Studies
+HIST-UA,History
+INTRL-UA,International Relations
+IRISH-UA,Irish Studies
+ITAL-UA,Italian
+JOUR-UA,Journalism
+LATC-UA,Latin Amer-Caribbean Studies
+LWSOC-UA,Law and Society
+LING-UA,Linguistics
+MATH-UA,Math
+MEDI-UA,Medieval & Renaissance Studies
+MEIS-UA,Middle Eastern and Islamic Studies
+MHUM-UA,Minor in Medical Humanities
+MUSIC-UA,Music
+NEURL-UA,Neural Science
+NODEP-UA,Non-Departmental
+PHIL-UA,Philosophy
+PHYS-UA,Physics
+POL-UA,Politics
+PORT-UA,Portuguese
+PSYCH-UA,Psychology
+PUBPL-UA,Public Policy
+RELST-UA,Religious Studies
+RUSSN-UA,Russian & Slavic Studies
+SCA-UA,Social and Cultural Analysis
+SOC-UA,Sociology
+SPAN-UA,Spanish
+AE-UY,Aerospace Engineering
+AN-UY,Anthropology
+AH-UY,Art History
+BMS-UY,Biomolecular Science
+CBE-UY,Chemical & Biological Engineering
+CM-UY,Chemistry
+CE-UY,Civil & Urban Engineering
+CP-UY,Co-op Education Program
+CS-UY,Computer Science
+CAM-UY,Culture, Arts, and Media
+EC-UY,Economics
+ECE-UY,Elect. Engineering - ECE UGRD
+EN-UY,English
+FIN-UY,Finance
+FL-UY,Foreign Language
+EG-UY,General Engineering
+GS-UY,General Studies
+HI-UY,History
+HU-UY,Humanities
+DM-UY,Integrated Digital Media
+LA-UY,Liberal Arts
+LS-UY,Life Sciences
+MG-UY,Management
+MA-UY,Mathematics
+ME-UY,Mechanical Engineering
+MD-UY,Media Studies
+MU-UY,Music
+PL-UY,Philosophy
+PH-UY,Physics
+PHP-UY,Prehealth Prep
+PS-UY,Psychology
+RSK-UY,Risk Engineering
+ROB-UY,Robotics
+STS-UY,Science and Technology
+SEG-UY,Society, Environment, & Globalization
+TCS-UY,Technology, Culture and Society
+UGA-UY,Undergraduate Academics
+URB-UY,Urban Studies
+VIP-UY,Vertically Integrated Projects
+ACCT-UB,Accounting
+BPEP-UB,Business and Political Economy Program
+BSPA-UB,Business and Society
+BTEP-UB,Business, Tech & Entrepreneurs
+TECH-UB,Computing and Data Science
+ECON-UB,Economics
+FINC-UB,Finance
+MGMT-UB,Management
+MKTG-UB,Marketing
+MULT-UB,Multidisciplinary
+OPMG-UB,Operations Management
+SOIM-UB,Social Impact
+STAT-UB,Statistics & Operations Research

@@ -23,6 +23,7 @@
             <li><a href="/groups"><i class="fas fa-users"></i></a></li>
             <li><a href="/settings"><i class="fas fa-cogs"></i></a></li>
             <li><a href="/find_peer"><i class="fas fa-search"></i></a></li>
+            <li><a href="/collaboration"><i class="fa-solid fa-user-group"></i></a></li>
         </ul>
     </div>
 
@@ -61,8 +62,7 @@
 
         <!-- Progress Bar -->
         <div class="progress-container">
-            <label>Completion: <span id="completion-percentage">{{ completion_percentage }}%</span></label>
-            <progress id="progress-bar" value="{{ completion_percentage }}" max="100"></progress>
+            <label>Completion: {{completion_percentage}}%</label>
         </div>
     </div>
 
@@ -107,7 +107,7 @@
         }
     </script>
 
-        <!-- Friends Progress Bento Box (Mockup) -->
+
         <div class="bento-box">
             <div class="friends-progress-container">
                 <h2>Groups' Progress</h2>
@@ -126,7 +126,7 @@
                         </div>
                         <span class="progress-text">85% Complete</span>
                     </div>
-                    <!-- Add more friends as needed -->
+
                 </div>
             </div>
             

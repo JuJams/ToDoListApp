@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="static/fonts/fonts.css"/>
+    <script src="task-split.js"></script>
+    <script src="chatbot.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/settings.css">
+    <link rel="stylesheet" href="static/collaboration.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="static/assets/stars.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="/"><i class="fas fa-home"></i></a></li>
+            <li><a href="/groups"><i class="fas fa-users"></i></a></li>
+            <li><a href="/settings"><i class="fas fa-cogs"></i></a></li>
+            <li><a href="/find_peer"><i class="fas fa-search"></i></a></li>
+            <li><a href="/collaboration"><i class="fa-solid fa-user-group"></i></a></li>
+
+            
+        </ul>
+    </div>
+
+    <div class="main-container">
+
+    <div class="container">
+        <header>
+            <h1>Task Collaboration</h1>
+            <h2>Roomates Group</h2>
+            <p>Manage and share your tasks with team members.</p>
+        </header>
+
+        <!-- Task Table -->
+        <section>
+            <h2>Your Tasks</h2>
+            <table class="tasks-table">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Assigned To</th>
+                        <th>Shared With</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task[1] }}</td>
+                        <td>{{ task[3] }}</td>
+                        <td>{{ task[5] }}</td>
+                        <td>{{ task[4] }}</td>
+                        <td>
+                            {% if task[4] == 'Pending' %}
+                            <a href="/mark_complete/{{ task[0] }}">Mark Complete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Add Task Form -->
+        <section>
+            <h2>Add New Task</h2>
+            <form method="POST" action="/collaboration">
+                <label for="title">Task Title:</label>
+                <input type="text" id="title" name="title" required><br>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea><br>
+
+                <label for="assigned_to">Assigned To (User ID):</label>
+                <input type="number" id="assigned_to" name="assigned_to" required><br>
+
+                <label for="shared_with">Shared With (User IDs, comma-separated):</label>
+                <input type="text" id="shared_with" name="shared_with" required><br>
+
+                <input type="submit" value="Add Task">
+            </form>
+        </section>
+
+        <!-- Collaborators -->
+        <section>
+            <h2>Collaborators</h2>
+
+            <!-- Display All Collaborators in a Table -->
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user[0] }}</td> 
+                        <td>{{ user[1] }}</td> 
+                        <td>{{ user[2] }}</td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Add New Collaborator</h3>
+            <form method="POST" action="/collaboration">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+
+                <input type="submit" value="Add Collaborator">
+            </form>
+        </section>
+    </div>
+    
+    </div>
+
+    <script>
+    // Optional: Add functionality to dynamically update the profile and settings
+    // You can extend this to dynamically change the profile info, classes, etc.
+    </script>
+</body>
+</html>
