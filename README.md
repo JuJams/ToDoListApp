@@ -32,11 +32,11 @@ A simple web-based To-Do List application built with Flask and SQLite, allowing 
 ## Screenshots
 
 ### Main Interface
-![Main Interface](Screenshots/mainpage.png)
+![Main Interface](Screenshots/MainPage.png)
 *The main interface of the To-Do List app where users can view and manage their tasks.*
 
 ### Task Management
-![Task Management](Screenshots/tasks.png)
+![Task Management](Screenshots/Tasks.png)
 *Here users can add new tasks, mark them as completed, or delete them.*
 
 ### Collaborating with Classmates
