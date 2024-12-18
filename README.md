@@ -6,11 +6,16 @@ A simple web-based To-Do List application built with Flask and SQLite, allowing 
 
 ## Features
 
-- 📝 **Add Tasks**: Create tasks with optional due dates.
-- ✅ **Mark Tasks as Completed**: Mark tasks as completed, with visual updates to indicate completion.
-- 🗑️ **Delete Tasks**: Remove tasks from the list.
-- 💾 **Persistent Storage**: Tasks are saved using SQLite, so they remain available after refreshing or closing the app.
-- 🖼️ **Dynamic UI**: Task status is dynamically updated in the user interface.
+- 📝 **Add Tasks**: Users can create tasks with optional due dates.
+- ✅ **Mark Tasks as Completed**: Users can mark tasks as completed, with visual updates to indicate completion.
+- 🗑️ **Delete Tasks**: Allows users to remove tasks from the list.
+- 💾 **Persistent Storage**: All tasks are saved using SQLite, ensuring data remains available after refreshing or closing the app.
+- 🖼️ **Dynamic UI**: The task status is dynamically updated in the user interface.
+- 💬 **AI Chatbot**: An AI-powered chatbot to assist users with queries and facilitate task management.
+- 🤝 **Peer Grouping**: Facilitates grouping with course mates for academic collaborations.
+- 🏠 **Roommate Task Management**: Enables users to add and manage tasks specifically designed for roommates.
+- 📞 **Real-time Chat**: Provides a platform for users to chat with course mates and roommates, enhancing communication and collaboration.
+
 
 ---
 
@@ -21,6 +26,22 @@ A simple web-based To-Do List application built with Flask and SQLite, allowing 
 - **HTML/CSS**: Structure and style the user interface.
 - **JavaScript**: Add interactivity for task completion and deletion.
 - **Python**: Core language for backend logic.
+
+---
+
+## Screenshots
+
+### Main Interface
+![Main Interface](Screenshots/mainpage.png)
+*The main interface of the To-Do List app where users can view and manage their tasks.*
+
+### Task Management
+![Task Management](Screenshots/tasks.png)
+*Here users can add new tasks, mark them as completed, or delete them.*
+
+### Collaborating with Classmates
+![Collaborating with Classmates](Screenshots/Classmates.png)
+*The interface for connecting with classmates and managing group tasks.*
 
 ---
 
@@ -42,7 +63,19 @@ A simple web-based To-Do List application built with Flask and SQLite, allowing 
 4. **Persistent Storage**:
    - All tasks are stored in an SQLite database, so they will persist even after closing the browser or restarting the app.
 
-5. **Run the App Locally**:
+5. **Using the AI Chatbot**:
+   - Interact with the AI chatbot through the chat interface for help with tasks or general inquiries.
+
+6. **Grouping with Peers**:
+   - Use the 'Group' feature to connect and collaborate with course mates on joint tasks or projects.
+
+7. **Manage Roommate Tasks**:
+   - Add and manage tasks that are specifically for your living arrangements with roommates.
+
+8. **Real-time Chat**:
+   - Use the chat feature to communicate in real-time with your course mates and roommates.
+
+9. **Run the App Locally**:
    - Clone the repository:
      ```bash
      git clone https://github.com/JuJams/ToDoListApp.git
